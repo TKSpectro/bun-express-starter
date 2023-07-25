@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        // default bun settings
+        "lib": [
+            "ESNext"
+        ],
+        "module": "esnext",
+        "target": "esnext",
+        "moduleResolution": "bundler",
+        "moduleDetection": "force",
+        "allowImportingTsExtensions": true,
+        "strict": true,
+        "downlevelIteration": true,
+        "skipLibCheck": true,
+        "jsx": "preserve",
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "allowJs": true,
+        "noEmit": true,
+        "types": [
+            "bun-types" // add Bun global
+        ],
+        // end default bun settings
+        "baseUrl": ".",
+        "paths": {
+            "@core/*": [
+                "./src/core/*"
+            ]
+        },
+        "resolveJsonModule": true,
+        "noImplicitAny": true,
+        "noUncheckedIndexedAccess": true,
+    }
+}

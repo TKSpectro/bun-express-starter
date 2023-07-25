@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+    mariadb:
+        image: mariadb:latest
+        restart: 'on-failure'
+        env_file: .env
+        environment:
+            - MYSQL_ROOT_PASSWORD=$DATABASE_PASSWORD
+            - MYSQL_DATABASE=$DATABASE_NAME
+        ports:
+            - $DATABASE_LOCAL_PORT:3306
+        volumes:
+            - db:/var/lib/mysql
+volumes:
+    db:

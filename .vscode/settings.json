@@ -1,0 +1,19 @@
+{
+    "eslint.enable": false,
+    "prettier.enable": false,
+    "editor.codeActionsOnSave": {
+        "quickfix.rome": true,
+        "source.organizeImports.rome": true,
+        "source.fixAll": false,
+        "source.organizeImports": false
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "rome.rome"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "rome.rome"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "rome.rome"
+    }
+}
