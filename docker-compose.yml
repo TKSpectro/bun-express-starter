@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-    mariadb:
-        image: mariadb:latest
+    mysql:
+        image: mysql:latest
         restart: 'on-failure'
         env_file: .env
         environment:

@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "3397d59a-1042-4ec2-94a6-9baf9a1075a0",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "6f200c93-1254-4914-873a-1baffac5e88f",
+  "prevId": "3397d59a-1042-4ec2-94a6-9baf9a1075a0",
   "tables": {
     "accounts": {
       "name": "accounts",
@@ -48,6 +48,13 @@
         "password": {
           "name": "password",
           "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "token_secret": {
+          "name": "token_secret",
+          "type": "varchar(8)",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false

@@ -26,6 +26,9 @@
             "@core/*": [
                 "./src/core/*"
             ],
+            "@util/*": [
+                "src/util/*"
+            ],
         },
         "resolveJsonModule": true,
         "noImplicitAny": true,

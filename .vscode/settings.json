@@ -3,23 +3,20 @@
     "prettier.enable": false,
     "editor.codeActionsOnSave": {
         "quickfix.rome": true,
-        "source.organizeImports.rome": true,
+        "source.organizeImports.rome": false,
         "source.fixAll": false,
-        "source.organizeImports": false
+        "source.organizeImports": true
     },
     "[javascript]": {
         "editor.defaultFormatter": "rome.rome",
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": false
-        }
     },
     "[typescript]": {
         "editor.defaultFormatter": "rome.rome",
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": false
-        }
     },
     "[json]": {
         "editor.defaultFormatter": "rome.rome"
-    }
+    },
+    "cSpell.words": [
+        "datetime"
+    ]
 }
