@@ -1,8 +1,7 @@
+import info from '../../package.json';
 import { createEnv } from '@t3-oss/env-core';
 import path from 'path';
 import { z } from 'zod';
-
-import info from '../../package.json';
 
 const asBoolean = (s: string) => s !== 'false' && s !== '0';
 const asNumber = (s: string) => parseInt(s, 10);
@@ -29,7 +28,7 @@ export const CONFIG = createEnv({
             .default('1')
             .transform(asNumber)
             .pipe(z.number().positive()),
-        PORT: z.coerce.number().int().positive().optional(),
+        PORT: z.coerce.number().int().positive().optional().default(3000),
 
         CORS_ENABLED: z.string().default('false').transform(asBoolean),
 
@@ -91,8 +90,6 @@ export const CONFIG = createEnv({
         TIMEZONE: z.string().optional().default('Europe/Berlin'),
     },
 
-    // ! THIS IS THE ONLY PLACE WHERE WE ALLOW THE USAGE OF process.env !  All other places should use the config object
-    // eslint-disable-next-line no-process-env
     runtimeEnv: process.env,
     isServer: true,
 

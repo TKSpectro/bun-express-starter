@@ -25,7 +25,7 @@
         "paths": {
             "@core/*": [
                 "./src/core/*"
-            ]
+            ],
         },
         "resolveJsonModule": true,
         "noImplicitAny": true,

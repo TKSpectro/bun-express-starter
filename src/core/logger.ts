@@ -1,10 +1,13 @@
-import { createLogger, format, transports } from 'winston';
-
 import info from '../../package.json';
 import { CONFIG } from './config';
+import { createLogger, format, transports } from 'winston';
 
 const messageFormatter = format.printf(({ level, message, timestamp, service, ...metadata }) => {
     let label = '';
+    if (metadata.xLabel) {
+        label = `[${metadata.xLabel}] `;
+        metadata.xLabel = undefined;
+    }
     if (typeof message === 'object') {
         if (message.xLabel) {
             label = `[${message.xLabel}] `;
