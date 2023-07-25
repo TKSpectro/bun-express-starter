@@ -1,0 +1,6 @@
+[run]
+watch = true
+
+[test]
+# Scripts to run before all test files
+preload = ["./tests/setup.ts"]

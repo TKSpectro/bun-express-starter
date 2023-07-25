@@ -15,6 +15,13 @@
       "when": 1690291870969,
       "tag": "0001_quick_lord_tyger",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1690292907280,
+      "tag": "0002_sudden_wendigo",
+      "breakpoints": true
     }
   ]
 }

@@ -6,7 +6,7 @@ import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { accountSchema } from './account.schema';
 
 export type Info = InferModel<typeof accountSchema>;
-type NewAccount = InferModel<typeof accountSchema, 'insert'>;
+export type New = InferModel<typeof accountSchema, 'insert'>;
 
 export const zSelectSchema = createSelectSchema(accountSchema);
 export const zCreateSchema = createInsertSchema(accountSchema, {
@@ -26,11 +26,14 @@ export const findOne = async (id: number) => {
         .then((res) => res[0]);
 };
 
-export const createOne = async (account: NewAccount) => {
-    return db.insert(accountSchema).values(account);
+export const createOne = async (account: New) => {
+    return db
+        .insert(accountSchema)
+        .values(account)
+        .then((res) => res[0]);
 };
 
-export const updateOne = async (id: number, account: Partial<NewAccount>) => {
+export const updateOne = async (id: number, account: Partial<New>) => {
     return db.update(accountSchema).set(account).where(eq(accountSchema.id, id));
 };
 

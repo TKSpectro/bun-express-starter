@@ -29,6 +29,9 @@
             "@util/*": [
                 "src/util/*"
             ],
+            "@modules/*": [
+                "src/modules/*"
+            ],
         },
         "resolveJsonModule": true,
         "noImplicitAny": true,

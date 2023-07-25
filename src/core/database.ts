@@ -4,7 +4,7 @@ import { Logger } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/mysql2';
 import mysql from 'mysql2/promise';
 
-const poolConnection = mysql.createPool({
+export const poolConnection = mysql.createPool({
     host: CONFIG.DATABASE_HOST,
     port: CONFIG.DATABASE_PORT,
     user: CONFIG.DATABASE_USER,
