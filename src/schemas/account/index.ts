@@ -1,7 +1,7 @@
 export * as Account from '.';
 
 import { db } from '@core/database';
-import { InferModel, eq } from 'drizzle-orm';
+import { InferModel, eq, inArray } from 'drizzle-orm';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { accountSchema } from './account.schema';
 
@@ -39,4 +39,8 @@ export const updateOne = async (id: number, account: Partial<New>) => {
 
 export const deleteOne = async (id: number) => {
     return db.delete(accountSchema).where(eq(accountSchema.id, id));
+};
+
+export const deleteMany = async (ids: number[]) => {
+    return db.delete(accountSchema).where(inArray(accountSchema.id, ids));
 };

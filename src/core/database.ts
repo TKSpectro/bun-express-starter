@@ -1,22 +1,8 @@
 import { CONFIG } from '@core/config';
 import { logger } from '@core/logger';
 import { Logger } from 'drizzle-orm';
-import { drizzle } from 'drizzle-orm/mysql2';
+import { MySql2Database, drizzle } from 'drizzle-orm/mysql2';
 import mysql from 'mysql2/promise';
-
-export const poolConnection = mysql.createPool({
-    host: CONFIG.DATABASE_HOST,
-    port: CONFIG.DATABASE_PORT,
-    user: CONFIG.DATABASE_USER,
-    database: CONFIG.DATABASE_NAME,
-    password: CONFIG.DATABASE_PASSWORD,
-    pool: {
-        min: CONFIG.DATABASE_POOL_MIN,
-        max: CONFIG.DATABASE_POOL_MAX,
-    },
-
-    idleTimeout: CONFIG.DATABASE_POOL_IDLE,
-});
 
 class DatabaseLogger implements Logger {
     logQuery(query: string, params: unknown[]): void {
@@ -24,10 +10,37 @@ class DatabaseLogger implements Logger {
     }
 }
 
-logger.info(
-    `[Database] Connecting to ${CONFIG.DATABASE_USER}@${CONFIG.DATABASE_HOST}:${CONFIG.DATABASE_PORT}/${CONFIG.DATABASE_NAME}`,
-);
+export let poolConnection: mysql.Pool;
+export let db: MySql2Database;
 
-export const db = drizzle(poolConnection, {
-    logger: CONFIG.DATABASE_LOGGING ? new DatabaseLogger() : false,
-});
+export const connectDatabase = async () => {
+    const isTest = process.env.NODE_ENV === 'test';
+
+    poolConnection = mysql.createPool({
+        host: isTest ? CONFIG.DATABASE_TEST_HOST : CONFIG.DATABASE_HOST,
+        port: isTest ? CONFIG.DATABASE_TEST_PORT : CONFIG.DATABASE_PORT,
+        user: isTest ? CONFIG.DATABASE_TEST_USER : CONFIG.DATABASE_USER,
+        database: isTest ? CONFIG.DATABASE_TEST_NAME : CONFIG.DATABASE_NAME,
+        password: isTest ? CONFIG.DATABASE_TEST_PASSWORD : CONFIG.DATABASE_PASSWORD,
+        pool: {
+            min: CONFIG.DATABASE_POOL_MIN,
+            max: CONFIG.DATABASE_POOL_MAX,
+        },
+
+        idleTimeout: CONFIG.DATABASE_POOL_IDLE,
+    });
+
+    db = drizzle(poolConnection, {
+        logger: CONFIG.DATABASE_LOGGING ? new DatabaseLogger() : false,
+    });
+
+    logger.info({
+        xLabel: 'Database',
+        message: 'connecting: ',
+        host: isTest ? CONFIG.DATABASE_TEST_HOST : CONFIG.DATABASE_HOST,
+        port: isTest ? CONFIG.DATABASE_TEST_PORT : CONFIG.DATABASE_PORT,
+        user: isTest ? CONFIG.DATABASE_TEST_USER : CONFIG.DATABASE_USER,
+        database: isTest ? CONFIG.DATABASE_TEST_NAME : CONFIG.DATABASE_NAME,
+        password: isTest ? CONFIG.DATABASE_TEST_PASSWORD : CONFIG.DATABASE_PASSWORD,
+    });
+};

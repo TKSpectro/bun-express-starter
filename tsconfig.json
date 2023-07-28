@@ -32,6 +32,12 @@
             "@modules/*": [
                 "src/modules/*"
             ],
+            "@schemas/*": [
+                "src/schemas/*"
+            ],
+            "@tests/*": [
+                "tests/*"
+            ],
         },
         "resolveJsonModule": true,
         "noImplicitAny": true,

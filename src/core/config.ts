@@ -1,7 +1,7 @@
-import info from '../../package.json';
 import { createEnv } from '@t3-oss/env-core';
 import path from 'path';
 import { z } from 'zod';
+import info from '../../package.json';
 
 const asBoolean = (s: string) => s !== 'false' && s !== '0';
 const asNumber = (s: string) => parseInt(s, 10);
@@ -43,10 +43,21 @@ export const CONFIG = createEnv({
             .default('3306')
             .transform(asNumber)
             .pipe(z.number().positive()),
-        DATABASE_NAME: z.string().optional().default(info.name),
+        DATABASE_NAME: z.string(),
         DATABASE_USER: z.string().optional().default('root'),
-        DATABASE_PASSWORD: z.string().optional(),
+        DATABASE_PASSWORD: z.string(),
         DATABASE_LOGGING: z.string().optional().default('false').transform(asBoolean),
+
+        DATABASE_TEST_HOST: z.string().optional().default('localhost'),
+        DATABASE_TEST_PORT: z
+            .string()
+            .optional()
+            .default('3306')
+            .transform(asNumber)
+            .pipe(z.number().positive()),
+        DATABASE_TEST_NAME: z.string(),
+        DATABASE_TEST_USER: z.string().optional().default('root'),
+        DATABASE_TEST_PASSWORD: z.string(),
 
         DATABASE_POOL_MIN: z
             .string()
